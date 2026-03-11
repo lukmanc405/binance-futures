@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-NekoAlpha Autopilot v5 - ICT Strategy (SECURED)
+NekoAlpha Autopilot v5 - PrimeSignal Strategy (SECURED)
 Fixed issues from code review:
 - API keys from environment variables
 - Proper error handling with timeouts
@@ -16,11 +16,11 @@ import os, json
 API_KEY = os.environ.get("BINANCE_API_KEY", "")
 SECRET = os.environ.get("BINANCE_SECRET", "")
 
-if not API_KEY    print("⚠️ WARNING: Set BINANCE or not SECRET:
-_API_KEY and BINANCE_SECRET env vars!")
+if not API_KEY or not SECRET:
+    print("⚠️ WARNING: Set BINANCE_API_KEY and BINANCE_SECRET env vars!")
     exit(1)
 
-TELEGRAM_CHANNEL = "-1003847994290"
+TELEGRAM_CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "")
 
 # TP/SL based on Fibonacci Extension from analysis
 # LONG: TP1 = price + (range × 1.272), SL = below support/EMA-21
@@ -108,7 +108,7 @@ def calculate_ema(prices, period=50):
         return None
 
 def analyze_symbol(symbol):
-    """ICT Strategy Analysis with proper error handling"""
+    """PrimeSignal Strategy Analysis with proper error handling"""
     try:
         prices = get_klines(symbol, '1h', 100)
         if not prices or len(prices) < 50: 
