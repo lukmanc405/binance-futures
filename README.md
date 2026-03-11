@@ -20,8 +20,8 @@ PrimeSignal is a custom price action strategy featuring:
 
 - PrimeSignal strategy implementation
 - Risk management controls
-- Paper trading mode
 - Multi-symbol support
+- Telegram signal notifications
 
 ## Installation
 
@@ -41,11 +41,8 @@ cp .env.example .env
 ## Usage
 
 ```bash
-# Run in paper mode (recommended for testing)
-python autopilot-v6.py --paper
-
-# Run in live mode
-python autopilot-v6.py --live
+# Run the bot
+python autopilot-v6.py
 ```
 
 ## Configuration
