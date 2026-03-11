@@ -1,6 +1,6 @@
 # Binance Futures Trading Bot
 
-Automated trading bot for Binance Futures with ICT/PrimeSignal strategy and risk management.
+Automated trading bot for Binance Futures with PrimeSignal strategy and risk management.
 
 ## ⚠️ Disclaimer
 
@@ -8,7 +8,7 @@ Trading cryptocurrencies involves substantial risk. This software is for educati
 
 ## Strategy
 
-ICT (Inner Circle Trader) inspired strategy with:
+PrimeSignal is a custom price action strategy featuring:
 - Multi-timeframe S/R detection (15m, 1h, 4h)
 - EMA-based trend identification (21, 50, 200)
 - RSI momentum filter
@@ -18,7 +18,7 @@ ICT (Inner Circle Trader) inspired strategy with:
 
 ## Features
 
-- ICT/PrimeSignal strategy implementation
+- PrimeSignal strategy implementation
 - Risk management controls
 - Paper trading mode
 - Multi-symbol support
