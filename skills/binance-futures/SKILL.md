@@ -4,9 +4,10 @@
 
 ## Description
 
-- 🎯 PrimeSignal Algorithm for precision signals
-- 🎯 Autopilot with TP/SL rules (LONG: +10% TP / -5% SL, SHORT: -10% TP / +5% SL)
+- 🎯 PrimeSignal Algorithm - AI-powered precision trading
+- 📈 Fibonacci Extension TP/SL for optimal profit targets
 - 🛡️ Max 8 positions, 40% margin cap
+- ⚡ Fully automated entry & exit
 
 ## Configuration
 
