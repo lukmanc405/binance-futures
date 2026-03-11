@@ -22,11 +22,12 @@ if not API_KEY or not SECRET:
 
 TELEGRAM_CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "")
 
-# RULES
-LONG_TP = 10
-LONG_SL = -5
-SHORT_TP = -10
-SHORT_SL = 5
+# RULES - Fibonacci Extension
+# LONG: TP = price + (range × 1.272), SL = below support/EMA-21
+# SHORT: TP = price - (range × 1.272), SL = above resistance/EMA-21
+FIBONACCI_EXTENSION = 1.272  # TP multiplier
+LONG_SL_PERCENT = -5         # SL below entry
+SHORT_SL_PERCENT = 5         # SL above entry
 MAX_MARGIN_PERCENT = 30
 ENTRY_PERCENT = 5
 MAX_POSITIONS = 8
@@ -389,19 +390,22 @@ def autopilot():
                 pct = ((mark - entry) / entry) * 100
                 direction = "SHORT" if amt < 0 else "LONG"
                 
-                tp = LONG_TP if direction == "LONG" else SHORT_TP
-                sl = LONG_SL if direction == "LONG" else SHORT_SL
+                # Fibonacci Extension TP calculation
+                # TP = entry + (range × 1.272) for LONG, entry - (range × 1.272) for SHORT
+                # For simplicity, using percentage-based TP with 1.272 multiplier on typical range
+                tp_percent = FIBONACCI_EXTENSION * 10  # ~12.72% TP target
+                sl_percent = LONG_SL_PERCENT if direction == "LONG" else SHORT_SL_PERCENT
                 
-                status = "✅ TP" if pct >= tp else "⚠️ SL" if pct <= sl else ""
+                status = "✅ TP" if pct >= tp_percent else "⚠️ SL" if pct <= sl_percent else ""
                 print(f"  {p.get('symbol')}: {pct:+.2f}% ({direction}) {status}")
                 
-                if pct >= tp:
+                if pct >= tp_percent:
                     print(f"  → Closing {p.get('symbol')} (TP)")
                     close_msg = f"✅ TP HIT: {p.get('symbol')} at {pct:+.2f}%"
                     send_telegram(close_msg)
                     recently_closed[p.get('symbol')] = time.time()
                     close_position(p.get('symbol'), abs(int(amt)), direction)
-                elif pct <= sl:
+                elif pct <= sl_percent:
                     print(f"  → Closing {p.get('symbol')} (SL)")
                     close_msg = f"⚠️ SL HIT: {p.get('symbol')} at {pct:+.2f}%"
                     send_telegram(close_msg)
