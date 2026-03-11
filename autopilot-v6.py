@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-NekoAlpha Autopilot v6 - ICT Strategy (Multi-Timeframe)
+NekoAlpha Autopilot v6 - PrimeSignal Strategy (Multi-Timeframe)
 Enhanced with chart pattern analysis like BNX example
 - Multi-timeframe S/R detection
 - Entry strategies: Breakout vs Bounce
@@ -17,12 +17,10 @@ API_KEY = os.environ.get("BINANCE_API_KEY", "")
 SECRET = os.environ.get("BINANCE_SECRET", "")
 
 if not API_KEY or not SECRET:
-    # Fallback for development - REMOVE IN PRODUCTION
-    API_KEY = "3IRXnZCH2SpGsQPT6klBWw09emw9XWxY1ClX2E6t5GbK5IgV3um45hX2Qro9adPY"
-    SECRET = "vdRkoKwgDypWeaVkFNAgaGfrReCTyi0jyYIsVvq40HFSCMdBv3TfpYLGzgYlyPcm"
-    print("⚠️ WARNING: Using hardcoded keys! Set BINANCE_API_KEY and BINANCE_SECRET env vars")
+    print("⚠️ ERROR: Set BINANCE_API_KEY and BINANCE_SECRET env vars!")
+    exit(1)
 
-TELEGRAM_CHANNEL = "-1003847994290"
+TELEGRAM_CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "")
 
 # RULES
 LONG_TP = 10
@@ -112,7 +110,7 @@ def calculate_ema(prices, period=50):
 
 def analyze_symbol(symbol):
     """
-    ICT Strategy Analysis with Multi-Timeframe Support/Resistance
+    PrimeSignal Strategy Analysis with Multi-Timeframe Support/Resistance
     Based on chart pattern analysis (like BNX example)
     """
     try:
